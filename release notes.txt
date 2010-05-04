@@ -1,4 +1,0 @@
-rep2ai version .7.0 by Jon Craton
-joncraton.org
-
-syntax: rep2ai -f filename -p player
