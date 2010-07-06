@@ -322,7 +322,7 @@ int unpack_section(FILE *file, byte *result, int size)
         if (fread(&length, 1, 4, file) == 0) return 4;
         if (length > size-m20) return 4;
         if (fread(result, 1, length, file) == 0) return 4;
-        if (length == (int)(min(size-m1C, sizeof(buffer)))) continue;
+        if (length == (int)(min((unsigned int)(size-m1C), sizeof(buffer)))) continue;
 
 
         // init rep struct 
@@ -333,7 +333,7 @@ int unpack_section(FILE *file, byte *result, int size)
         rep.m10 = length;
         rep.m14 = sizeof(buffer);
         // unpack replay section 
-        if (unpack_rep_section(&myesi, &rep) == 0 && rep.m0C <= sizeof(buffer)) len = rep.m0C; else len = 0;
+        if (unpack_rep_section(&myesi, &rep) == 0 && (unsigned int)rep.m0C <= sizeof(buffer)) len = rep.m0C; else len = 0;
         if (len == 0 || len > size) return 4;
 
 		// Main decompression functions
