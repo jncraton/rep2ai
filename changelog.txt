@@ -1,0 +1,4 @@
+# .7.2
+
+- smaller binary size due to added compiler optimizations
+- many source code changes
