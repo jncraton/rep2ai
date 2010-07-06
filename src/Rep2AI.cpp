@@ -146,7 +146,7 @@ bool Rep2AI::convertActionsToAI() {
 	ai.replace(1, char((ai.getCursorAddress() + 1 + 4) & 0x000000FF)); 
 	ai.replace(2, char(((ai.getCursorAddress() + 1 + 4) & 0x0000FF00) >> 8));
 	ai.standardIntro();
-	ai.say("I was created using lifestyl3's Rep2AI converter");
+	ai.say("I was created using jncraton's Rep2AI converter");
 	while(replay->actionList.hasNext()) {
 		Action action = replay->actionList.next();
 		thisTime = action.time;
