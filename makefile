@@ -14,7 +14,7 @@ LIBS =  -lz -lmingw32
 INCS =  
 CXXINCS = 
 BIN  = rep2ai.exe
-CXXFLAGS = $(CXXINCS)
+CXXFLAGS = $(CXXINCS) -Wall -O2
 CFLAGS = $(INCS)
 RM = del
 
@@ -26,7 +26,7 @@ clean: clean-custom
 	${RM} $(OBJ) $(BIN)
 
 $(BIN): $(OBJ)
-	$(CPP) $(OBJ) -o $(BIN) $(LIBS)
+	$(CPP) $(OBJ) -o $(BIN) $(LIBS) $(CXXFLAGS)
 	
 $(BUILD)/Action.o: $(SRC)/Action.cpp
 	$(CPP) -c $(SRC)/Action.cpp -o $(BUILD)/Action.o $(CXXFLAGS)
