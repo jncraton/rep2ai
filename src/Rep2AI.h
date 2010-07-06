@@ -27,8 +27,6 @@ class Rep2AI {
 		bool makeAI();
 	private:
 		bool notSpam();
-		bool convertToText(string filename);
-		bool convertTextToActions(string player);
 		bool findAttack();
 		bool convertActionsToAI();
 		void setLimits();
