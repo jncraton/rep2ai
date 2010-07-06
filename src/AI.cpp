@@ -100,7 +100,7 @@ bool AI::run() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::build(char number, char building, char priority) {
+void AI::build(char number, int building, char priority) {
 	if(number > maxUnits[building]) number = maxUnits[building];
 	if(building == char(photon_cannon)) waitBuild(1, forge);
 	add(0x06); //build command
@@ -112,7 +112,7 @@ void AI::build(char number, char building, char priority) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::train(char number, char unit) {
+void AI::train(char number, int unit) {
 	if(number > maxUnits[unit]) number = maxUnits[unit];
 	 add(0x4C); //train command
 	 add(number);
@@ -122,7 +122,7 @@ void AI::train(char number, char unit) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::attackAdd(char number, char unit) {
+void AI::attackAdd(char number, int unit) {
 	if(number > maxUnits[unit]) number = maxUnits[unit];
 	add(attack_add);
 	add(number);
@@ -142,7 +142,7 @@ void AI::upgrade(char level, char upgrade, char priority) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::tech(char technology, char priority) {
+void AI::tech(int technology, char priority) {
 	if(!(researchComplete[technology])) {
 		add(0x08); //tech command
 		add(technology);
@@ -177,7 +177,7 @@ void AI::debugJump(int address, string message) {
 	highByte = (address & 0x0000FF00) >> 8;
 	add(lowByte);
 	add(highByte);
-	for(int i = 0; i < message.length(); i++) {
+	for(unsigned int i = 0; i < message.length(); i++) {
 		add(message[i]);	
 	}
 	add(0x00);
@@ -214,7 +214,7 @@ void AI::expand(char expansion, int address) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::waitBuild(char number, char building) {
+void AI::waitBuild(char number, int building) {
 	if(number > maxUnits[building]) number = maxUnits[building];
 	add(0x09); //wait_build command
 	add(number);
@@ -224,14 +224,14 @@ void AI::waitBuild(char number, char building) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::buildWaitBuild(char number, char building, char priority) {
+void AI::buildWaitBuild(char number, int building, char priority) {
 	build(number, building, priority);
 	waitBuild(number, building);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::waitBuildStart(char number, char building) {
+void AI::waitBuildStart(char number, int building) {
 	if(number > maxUnits[building]) number = maxUnits[building];
 	add(0x0A); //wait_buildstart command
 	add(number);
@@ -241,7 +241,7 @@ void AI::waitBuildStart(char number, char building) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::waitTrain(char number, char unit) {
+void AI::waitTrain(char number, int unit) {
 	if(number > maxUnits[unit]) number = maxUnits[unit];
 	add(wait_train);
 	add(number);
@@ -262,7 +262,7 @@ void AI::wait(int duration) {
 }
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::defineMax(char number, char unit) {
+void AI::defineMax(char number, int unit) {
 	add(0x4B);
 	add(number);
 	add(unit);
@@ -271,7 +271,7 @@ void AI::defineMax(char number, char unit) {
 }
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::defenseUse(char offset, char number, char unit) {
+void AI::defenseUse(char offset, char number, int unit) {
 	add(defenseuse + offset); //offset tells it which type (gg, ag, etc)
 	add(number);
 	add(unit);
@@ -293,7 +293,7 @@ void AI::stop() {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::safeBuild(char number, char building, char priority) {
+void AI::safeBuild(char number, int building, char priority) {
 	if(building == gateway)
 		buildWaitBuild(1, pylon, priority);
 	if(building == cybernetics_core)
@@ -329,14 +329,14 @@ void AI::safeBuild(char number, char building, char priority) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::safeBuildOne(char building, char priority) {
+void AI::safeBuildOne(int building, char priority) {
 	totalUnits[building]++;
 	safeBuild(totalUnits[building], building, priority);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::safeTrain(char number, char unit) {
+void AI::safeTrain(char number, int unit) {
 	switch (unit) {
 		case dark_templar: case high_templar: case archon: case dark_archon:
 			safeBuild(1, templar_archives, 80);
@@ -355,19 +355,18 @@ void AI::safeTech(char technology, char priority) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AI::safeTrainOne(char unit) {
+void AI::safeTrainOne(int unit) {
 	totalUnits[unit]++;
 	safeTrain(char(totalUnits[unit]), unit);
 }
 
-void AI::setMax(char number, char unit) {
+void AI::setMax(char number, int unit) {
 	maxUnits[unit] = number;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void AI::standardIntro() {
-	char intro[3] = {0x03, 0x2B, 0x32};
 	add(0x03); //start_town
 	add(0x2B); //transports_off
 	add(0x32); //farms_notiming

@@ -28,7 +28,7 @@ Replay::Replay(char * filename) {
 		if((unsigned int)header[0xA1+9 + i*36] > 3) {
 			playerRace[i] = 'N';
 		} else { 
-			playerRace[i] = raceList[header[0xA1+9 + i*36]];
+			playerRace[i] = raceList[(int)header[0xA1+9 + i*36]];
 		}	
 	}
 

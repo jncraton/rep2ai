@@ -19,8 +19,8 @@ class Replay
 		char header[0x279];
 		char gameName[29];
 		char playerName[8][26];
-		char playerRace[8];
-		char playerID[8];		
+		int playerRace[8];
+		int playerID[8];		
 
 	private:
 		

@@ -7,6 +7,8 @@
 
 using namespace std;
 
+typedef int unit;
+
 class AI
 {
 
@@ -16,32 +18,32 @@ class AI
 		void debugMode();
 		void setRaceDefaults();
 		void setRace(char newRace);
-		void build(char number, char building, char priority);
+		void build(char number, int building, char priority);
 		void upgrade(char level, char upgrade, char priority);
-		void tech(char upgrade, char priority);
-		void train(char number, char unit);
-		void attackAdd(char number, char unit);
-		void waitBuild(char number, char building);
-		void buildWaitBuild(char number, char building, char priority);
-		void waitBuildStart(char number, char building);
-		void waitTrain(char number, char unit);
+		void tech(int upgrade, char priority);
+		void train(char number, int unit);
+		void attackAdd(char number, int unit);
+		void waitBuild(char number, int building);
+		void buildWaitBuild(char number, int building, char priority);
+		void waitBuildStart(char number, int building);
+		void waitTrain(char number, int unit);
 		void wait(int duration);
-		void defineMax(char number, char unit);
-		void defenseUse(char offset, char number, char unit);
+		void defineMax(char number, int unit);
+		void defenseUse(char offset, char number, int unit);
 		void jump(int address);
 		void jump(char block);
 		void debugJump(int address, string message);
 		void say(string message);
 		void multirun(int address);
 		void expand(char expansion, int address);
-		void safeBuild(char number, char building, char priority);
-		void safeBuildOne(char building, char priority);
-		void safeTrain(char number, char unit);
-		void safeTrainOne(char unit);
+		void safeBuild(char number, int building, char priority);
+		void safeBuildOne(int building, char priority);
+		void safeTrain(char number, int unit);
+		void safeTrainOne(int unit);
 		void safeTech(char technology, char priority);
 		void creep(char byte);
 		void stop();
-		void setMax(char number, char unit);
+		void setMax(char number, int unit);
 		void standardIntro();
 		bool write();
 		bool run();
@@ -132,115 +134,115 @@ const string unitToString[256] = {
 };
 
 //Protoss
-const char nexus = 154;
-const char probe = 64;
-const char pylon = 156;
-const char assimilator = 157;
-const char forge = 166;
-const char gateway = 160;
-const char photon_cannon = 162;
-const char cybernetics_core = 164;
-const char citadel_of_adun = 163;
-const char templar_archives = 165;
-const char robotics_facility = 155;
-const char robotics_support_bay = 171;
-const char observatory = 159;
-const char stargate = 167;
-const char arbiter_tribunal = 170;
-const char fleet_beacon = 169;
+const int nexus = 154;
+const int probe = 64;
+const int pylon = 156;
+const int assimilator = 157;
+const int forge = 166;
+const int gateway = 160;
+const int photon_cannon = 162;
+const int cybernetics_core = 164;
+const int citadel_of_adun = 163;
+const int templar_archives = 165;
+const int robotics_facility = 155;
+const int robotics_support_bay = 171;
+const int observatory = 159;
+const int stargate = 167;
+const int arbiter_tribunal = 170;
+const int fleet_beacon = 169;
 
-const char p_armor = 5;
+const int p_armor = 5;
 
-const char zealot = 65;
-const char dragoon = 66;
-const char dark_templar = 61;
-const char high_templar = 67;
-const char archon = 68;
-const char dark_archon = 63;
-const char shuttle = 69;
-const char reaver = 83;
-const char observer = 84;
-const char corsair = 60;
-const char scout = 70;
-const char carrier = 72;
-const char arbiter = 71;
+const int zealot = 65;
+const int dragoon = 66;
+const int dark_templar = 61;
+const int high_templar = 67;
+const int archon = 68;
+const int dark_archon = 63;
+const int shuttle = 69;
+const int reaver = 83;
+const int observer = 84;
+const int corsair = 60;
+const int scout = 70;
+const int carrier = 72;
+const int arbiter = 71;
 
-const char protossUnits[11] = {zealot, dragoon, dark_templar, high_templar, archon,
+const int protossUnits[11] = {zealot, dragoon, dark_templar, high_templar, archon,
 	dark_archon, reaver, corsair, scout, carrier, arbiter};
 const int protossTotalUnits = 11;
 
 //Terran
-const char command_center = 106;
-const char scv = 7;
-const char supply_depot = 109;
-const char refinery = 110;
-const char comsat_station = 107;
-const char barracks = 111;
-const char academy = 112;
-const char factory = 113;
-const char starport = 114;
-const char control_tower = 115;
-const char science_facility = 116;
-const char covert_ops = 117;
-const char physics_lab = 118;
-const char machine_shop = 120;
-const char engineering_bay = 122;
-const char armory = 123;
-const char missile_turret = 124;
-const char bunker = 125;
+const int command_center = 106;
+const int scv = 7;
+const int supply_depot = 109;
+const int refinery = 110;
+const int comsat_station = 107;
+const int barracks = 111;
+const int academy = 112;
+const int factory = 113;
+const int starport = 114;
+const int control_tower = 115;
+const int science_facility = 116;
+const int covert_ops = 117;
+const int physics_lab = 118;
+const int machine_shop = 120;
+const int engineering_bay = 122;
+const int armory = 123;
+const int missile_turret = 124;
+const int bunker = 125;
 
-const char marine = 0;
-const char ghost = 1;
-const char vulture = 2;
-const char goliath = 3;
-const char siege_tank = 5;
-const char wraith = 8;
-const char science_vessel = 9;
-const char dropship = 11;
-const char battlecruiser = 12;
-const char nuclear_missile = 14;
-const char firebat = 32;
-const char medic = 34;
-const char valkyrie = 58;
+const int marine = 0;
+const int ghost = 1;
+const int vulture = 2;
+const int goliath = 3;
+const int siege_tank = 5;
+const int wraith = 8;
+const int science_vessel = 9;
+const int dropship = 11;
+const int battlecruiser = 12;
+const int nuclear_missile = 14;
+const int firebat = 32;
+const int medic = 34;
+const int valkyrie = 58;
 
-const char terranUnits[11] = {marine, firebat, ghost, medic, siege_tank,
+const int terranUnits[11] = {marine, firebat, ghost, medic, siege_tank,
 	vulture, goliath, wraith, valkyrie, battlecruiser};
 const int terranTotalUnits = 10;
 
 //Zerg
-const char drone = 41;
-const char overlord = 42;
-const char infested_command_center = 130;
-const char hatchery = 131;
-const char lair = 132;
-const char hive = 133;
-const char nydus_canal = 134;
-const char hydralisk_den = 135;
-const char defiler_mound = 136;
-const char greater_spire = 137;
-const char queen_nest = 138;
-const char evolution_chamber = 139;
-const char ultralisk_cavern = 140;
-const char spire = 141;
-const char spawning_pool = 142;
-const char creep_colony = 143;
-const char spore_colony = 144;
-const char sunken_colony = 146;
-const char extractor = 149;
+const int drone = 41;
+const int overlord = 42;
+const int infested_command_center = 130;
+const int hatchery = 131;
+const int lair = 132;
+const int hive = 133;
+const int nydus_canal = 134;
+const int hydralisk_den = 135;
+const int defiler_mound = 136;
+const int greater_spire = 137;
+const int queen_nest = 138;
+const int evolution_chamber = 139;
+const int ultralisk_cavern = 140;
+const int spire = 141;
+const int spawning_pool = 142;
+const int creep_colony = 143;
+const int spore_colony = 144;
+const int sunken_colony = 146;
+const int extractor = 149;
 
-const char zergling = 37;
-const char hydralisk = 38;
-const char ultralisk = 39;
-const char mutalisk = 43;
-const char guardian = 44;
-const char queen = 45;
-const char defiler = 46;
-const char scourge = 47;
-const char infested_terran = 50;
-const char devourer = 62;
-const char lurker = 103;
+const int zergling = 37;
+const int hydralisk = 38;
+const int ultralisk = 39;
+const int mutalisk = 43;
+const int guardian = 44;
+const int queen = 45;
+const int defiler = 46;
+const int scourge = 47;
+const int infested_terran = 50;
+const int devourer = 62;
+const int lurker = 103;
 
-const char zergUnits[8] = {zergling, hydralisk, mutalisk, lurker, scourge, guardian,
+const int zergUnits[8] = {zergling, hydralisk, mutalisk, lurker, scourge, guardian,
 	devourer, ultralisk};
 const int zergTotalUnits = 8;
 

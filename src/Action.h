@@ -17,7 +17,7 @@ class Action
 		char player; //player that executed the action
 		char type; //command opcode
 		int time;
-		char recipient; //recipient of the action (unit trained, etc)
+		int recipient; //recipient of the action (unit trained, etc)
 		short int x;
 		short int y;
 		

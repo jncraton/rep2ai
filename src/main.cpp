@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
 
 	char* filename = "";
 	char* player = "";
-	char race;
 	bool badParameter = false;
 	bool run = false;
 	bool debug = false;
