@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "AI\AI.h"
-#include "Replay\Action.h"
-#include "Replay\Replay.h"
+#include "AI.h"
+#include "Action.h"
+#include "Replay.h"
 
 using namespace std;
 

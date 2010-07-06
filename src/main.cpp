@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#include "Replay\Replay.h"
-#include "AI\AI.h"
+#include "Replay.h"
+#include "AI.h"
 #include "Rep2AI.h"
 
 using namespace std;
