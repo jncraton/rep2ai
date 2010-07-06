@@ -1,5 +1,4 @@
-rep2ai 
-======
+# rep2ai 
 
 Version .7.2 by Jon Craton
 http://joncraton.org/projects/rep2ai
