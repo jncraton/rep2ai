@@ -90,7 +90,7 @@ void MainFrame::OpenReplay( wxCommandEvent& event ) {
     
     replayFilename = file_dialog.GetPath();
     
-    *text << "Opening replay" << replayFilename << "...\n";
+    *text << "Opening replay " << replayFilename << "...\n";
     
     replay = new Replay((char*)replayFilename.c_str());
     
