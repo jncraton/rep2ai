@@ -45,7 +45,7 @@ void MainFrame::CreateGUIControls() {
     
     // Text Area
 
-    text = new wxTextCtrl(this, ID_TEXT, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxVSCROLL|wxHSCROLL|wxNO_BORDER|wxWANTS_CHARS);
+    text = new wxTextCtrl(this, ID_TEXT, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxVSCROLL|wxHSCROLL|wxNO_BORDER|wxTE_READONLY);
 }
 
 void MainFrame::OnClose(wxCloseEvent& event) {
