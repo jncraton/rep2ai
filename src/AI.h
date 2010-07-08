@@ -57,7 +57,7 @@ class AI
 	
 	private:
 		
-		char script[10000]; //holds the hex opcodes for aiscript.bin
+		char script[8192]; //holds the hex opcodes for aiscript.bin
 		
 		//these allow more racially portable code
 		int worker;
