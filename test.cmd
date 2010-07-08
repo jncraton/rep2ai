@@ -1,1 +1,1 @@
-rep2ai -f test.rep -p Jon 
+rep2ai -f test.rep -p jncraton
