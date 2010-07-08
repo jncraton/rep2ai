@@ -205,20 +205,20 @@ bool Rep2AI::convertActionsToAI() {
 							numExpansions++;
 							ai.expand(numExpansions,-1);
 						} else {
-							ai.safeBuildOne(action.recipient, 1);
+							ai.safeBuildOne(action.recipient, 80);
 						}
 						defineBase(action.x, action.y);
 					}	
 					//make sure the script doesn't accidentally create more than one gas or comsat
 					else if(action.recipient == assimilator || action.recipient == refinery || action.recipient == extractor) {
 						if(noGasYet) {
-							ai.safeBuildOne(action.recipient, 1);
+							ai.safeBuildOne(action.recipient, 80);
 							noGasYet = false;
 						}
 					}
 					else if(action.recipient == comsat_station) {
 						if(noComsatYet) {
-							ai.safeBuildOne(action.recipient, 1);
+							ai.safeBuildOne(action.recipient, 80);
 							noComsatYet = false;
 						}
 					}
@@ -231,13 +231,13 @@ bool Rep2AI::convertActionsToAI() {
 								farmsDone = true; //there's no reason to keep manually building farms after farms_timing
 							} 
 							else {
-								ai.safeBuildOne(action.recipient, 1);
+								ai.safeBuildOne(action.recipient, 80);
 							}	
 						}
 					}
 					//otherwise just build the unit	
 					else {
-						ai.safeBuildOne(action.recipient, 1);
+						ai.safeBuildOne(action.recipient, 80);
 					}
 					if(BOSupply > 0) printf("%d %s\n",BOSupply,unitToString[action.recipient].c_str());
 			}
