@@ -68,32 +68,35 @@ bool AI::write() {
 			0x05,0x00,0x00,0x00,0x00,0x00,0x00,0x00}; 
 	char closeZerg[20] = {'Z','M','C','x',0x04,0x00,0x00,0x00,0x41,0x05,0x00,0x00,
 			0x05,0x00,0x00,0x00,0x00,0x00,0x00,0x00}; 
-	FILE * aifile;
+	FILE * aiscript;
 	FILE * sempq;
 	sempq = fopen("inject.exe","wb");
-	aifile = fopen("aiscript.bin","wb");
+	aiscript = fopen("aiscript.bin","wb");
 	
 	// write the start of the sempq
 	fwrite(sempq_start, sempq_start_len, 1, sempq);
 
 	// write the length of aiscript.bin
 	fwrite(&length, sizeof(int), 1, sempq);
-	fwrite(&length, sizeof(int), 1, aifile);
+	fwrite(&length, sizeof(int), 1, aiscript);
 	
 	// write the script
 	fwrite(script, sizeof(char), cursor + 1, sempq);
-	fwrite(script, sizeof(char), cursor + 1, aifile);
+	fwrite(script, sizeof(char), cursor + 1, aiscript);
 	
 	// close the script
 	switch(race) {	
 		case 'P':
 			fwrite(closeToss, sizeof(char), 20, sempq);
+			fwrite(closeToss, sizeof(char), 20, aiscript);
 		break;
 		case 'T':
 			fwrite(closeTerran, sizeof(char), 20, sempq);
+			fwrite(closeTerran, sizeof(char), 20, aiscript);
 		break;
 		case 'Z':
 			fwrite(closeZerg, sizeof(char), 20, sempq);
+			fwrite(closeZerg, sizeof(char), 20, aiscript);
 		break;
 	}
 	
@@ -103,7 +106,7 @@ bool AI::write() {
 	
 	// close the files
 	fclose(sempq);
-	fclose(aifile);
+	fclose(aiscript);
 	return true;
 }
 
