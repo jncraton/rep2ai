@@ -16,22 +16,22 @@ Action::~Action() {
 
 int Action::set(void * address, int t) {
 	int chunkBytes = 2; //1 byte(player) + 1 byte(type)
-	player = *((char*)(address));
-	type = *((char*)(address)+1);
+	player = *((unsigned char*)(address));
+	type = *((unsigned char*)(address)+1);
 	time = t;
 
 	switch(type) {
 		case 0x09: //Select
-			chunkBytes += 1 + (2 * int((*((char*)(address)+2))));
+			chunkBytes += 1 + (2 * int((*((unsigned char*)(address)+2))));
 			break;
 		case 0x0A: //Shift Select
-			chunkBytes += 1 + (2 * int((*((char*)(address)+2))));
+			chunkBytes += 1 + (2 * int((*((unsigned char*)(address)+2))));
 			break;
 		case 0x0B: //Deselect
-			chunkBytes += 1 + (2 * int((*((char*)(address)+2))));
+			chunkBytes += 1 + (2 * int((*((unsigned char*)(address)+2))));
 			break;
 		case 0x0C: //Build
-			recipient = *((char*)(address)+7);
+			recipient = (int)*((unsigned char*)(address)+7);
 			x = *((char*)address+3);
 			y = *((char*)address+5);
 			chunkBytes += 7;
@@ -73,7 +73,7 @@ int Action::set(void * address, int t) {
 			chunkBytes += 1;
 			break;
 		case 0x1F: //Train
-			recipient = *((char*)(address)+2);
+			recipient = *((unsigned char*)(address)+2);
 			chunkBytes += 2;
 			break;
 		case 0x20:
@@ -86,7 +86,7 @@ int Action::set(void * address, int t) {
 			chunkBytes += 1;
 			break;
 		case 0x23: //Hatch
-			recipient = *((char*)(address)+2);
+			recipient = *((unsigned char*)(address)+2);
 			chunkBytes += 2;
 			break;						
 		case 0x25:
@@ -123,18 +123,18 @@ int Action::set(void * address, int t) {
 			chunkBytes += 4;
 			break;
 		case 0x30: //Research
-			recipient = *((char*)(address)+2);
+			recipient = *((unsigned char*)(address)+2);
 			chunkBytes += 1;
 			break;						
 		case 0x31:
 			chunkBytes += 0;
 			break;						
 		case 0x32: //Upgrade
-			recipient = *((char*)(address)+2);
+			recipient = *((unsigned char*)(address)+2);
 			chunkBytes += 1;
 			break;			
 		case 0x35: //Morph
-			recipient = *((char*)(address)+2);
+			recipient = *((unsigned char*)(address)+2);
 			chunkBytes += 2;
 			break;		
 		case 0x36:
