@@ -1,1 +1,1 @@
-rep2ai -f test.rep -p jncraton -r
+rep2ai_cl -f test.rep -p jncraton -r
