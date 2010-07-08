@@ -1,4 +1,5 @@
 #include "AI.h"
+#include "sempq.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -68,7 +69,9 @@ bool AI::write() {
 	char closeZerg[20] = {'Z','M','C','x',0x04,0x00,0x00,0x00,0x41,0x05,0x00,0x00,
 			0x05,0x00,0x00,0x00,0x00,0x00,0x00,0x00}; 
 	FILE * aifile;
-	aifile = fopen("aiscript.bin","wb");
+	aifile = fopen("inject.exe","wb");
+	// write the start of the exe
+	fwrite(sempq_start, sempq_start_len, 1, aifile);
 	fwrite(&length, sizeof(int), 1, aifile); //length of the script
 	fwrite(script, sizeof(char), cursor + 1, aifile); //then the script
 	switch(race) {	//then script info	
@@ -81,7 +84,9 @@ bool AI::write() {
 		case 'Z':
 			fwrite(closeZerg, sizeof(char), 20, aifile);
 		break;
-	}	
+	}
+    fseek(aifile, sempq_start_len + 8192, SEEK_SET);
+	fwrite(sempq_end, sempq_end_len, 1, aifile);
 	fclose(aifile);
 	return true;
 }
