@@ -11,4 +11,7 @@ All you need to do is provide rep2ai with a replay file and a player
 name. It will take care of the rest. It will output a new aiscript.bin 
 file which can be injected into the game in several different ways.
 
-Syntax: rep2ai -f filename -p player
+Syntax: rep2ai -f filename -p player -r
+
+-r 
+    Run - This causes SC to run with the new script automatically

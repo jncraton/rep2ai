@@ -2,6 +2,7 @@
 
 - now writes script to an SEMPQ for quick injection
 - fixed several bugs
+- added -r flag to automatically inject script and run SC
 
 # .7.2
 

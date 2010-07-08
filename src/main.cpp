@@ -72,6 +72,7 @@ int main(int argc, char *argv[])
 	if(debug) rep2ai.debugMode();
 	rep2ai.findPlayer(player);
 	rep2ai.makeAI();
+	if(run) rep2ai.runAI();
 
 	if(!cont) system("PAUSE");
     return EXIT_SUCCESS;

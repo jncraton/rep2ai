@@ -113,12 +113,7 @@ bool AI::write() {
 ////////////////////////////////////////////////////////////////////////////////
 
 bool AI::run() {
-	cout << "Patching the script into the game..." << endl;
-	system("copy airun.dat airun.exe");
-	system("mpq2k a airun.exe AI.bin \\scripts\\AI.bin");
-	if(!debugOn) system("del AI.bin");
-	system("airun.exe");
-	system("del airun.exe");
+	system("inject.exe");
 	return true;
 }
 
