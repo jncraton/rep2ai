@@ -40,8 +40,10 @@ class MainFrame : public wxFrame
 
     private:
         // Event handlers
-        DECLARE_EVENT_TABLE();
         void OnClose(wxCloseEvent& event);
+        void OnExit(wxCommandEvent& event);
+
+        DECLARE_EVENT_TABLE();
 
         // Functions
         void CreateGUIControls();
@@ -49,12 +51,16 @@ class MainFrame : public wxFrame
         // wxWidgets gui objects
         wxStatusBar* statusBar;
         wxMenuBar* menuBar;
+        wxMenu* fileMenu;
+        wxTextCtrl* text;
         
     private:
         // Enumeration for GUI controls
         enum {
             ////GUI Enum Control ID Start
-            ID_TEXT = 1000,
+            ID_OPEN = 1000,
+            ID_EXIT,
+            ID_TEXT,
             ID_STATUSBAR
         };
 };
