@@ -9,7 +9,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 	printf("rep2ai 0.7.3 by Jon Craton (joncraton.org)\n");
-	printf("usage:  rep2ai -f [file] -p [player] -d -c\n \n");
+	printf("usage:  rep2ai -f [file] -p [player] -r -d -c\n \n");
 
 	char* filename = "";
 	char* player = "";
