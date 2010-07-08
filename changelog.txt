@@ -1,3 +1,8 @@
+# .7.3
+
+- now writes script to an SEMPQ for quick injection
+- fixed several bugs
+
 # .7.2
 
 - smaller binary size due to added compiler optimizations
