@@ -33,6 +33,14 @@ Replay::Replay(char * filename) {
 	}
 
 	actionList.build(cmd, cmdSize);
+	
+	// count how many players we have
+	numPlayers = 0;
+	for(int i = 0; i < 8; i++) {
+		if(playerID[i] > -1) {
+			numPlayers++;
+		}
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////
