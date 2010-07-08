@@ -17,18 +17,17 @@
     #include <wx/wxprec.h>
 #endif
 
-
-#include <wx/timer.h>
 #include <wx/menu.h>
 #include <wx/statusbr.h>
-#include <wx/slider.h>
 #include <wx/stattext.h>
-#include <wx/choice.h>
+#include <wx/combobox.h>
 #include <wx/panel.h>
 #include <wx/sizer.h>
-#include <wx/progdlg.h>
-#include <wx/dcbuffer.h>
-                           
+              
+#include "AI.h"
+#include "Replay.h"
+#include "Rep2AI.h"
+
 #undef MainFrame_STYLE
 #define MainFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
 
@@ -42,6 +41,9 @@ class MainFrame : public wxFrame
         // Event handlers
         void OnClose(wxCloseEvent& event);
         void OnExit(wxCommandEvent& event);
+        void SelectPlayer(wxCommandEvent& event);
+        void OpenReplay(wxCommandEvent& event);
+        void RunAI(wxCommandEvent& event);
 
         DECLARE_EVENT_TABLE();
 
@@ -52,7 +54,14 @@ class MainFrame : public wxFrame
         wxStatusBar* statusBar;
         wxMenuBar* menuBar;
         wxMenu* fileMenu;
+        wxPanel* panel;
+        wxBoxSizer* sizer;
+        wxComboBox* playerSelection;
         wxTextCtrl* text;
+        
+        // rep2ai
+        Replay* replay;
+        wxString replayFilename;
         
     private:
         // Enumeration for GUI controls
@@ -61,6 +70,7 @@ class MainFrame : public wxFrame
             ID_OPEN = 1000,
             ID_EXIT,
             ID_TEXT,
+            ID_PLAYERSELECTION,
             ID_STATUSBAR
         };
 };
