@@ -18,6 +18,7 @@ MainFrame::MainFrame(wxWindow *parent, wxWindowID id, const wxString &title, con
     *   Constructor for the Main frame.
     */
     CreateGUIControls();
+    replayFilename = "";
 }
 
 MainFrame::~MainFrame() {
@@ -110,6 +111,8 @@ void MainFrame::SelectPlayer( wxCommandEvent& event ) {
     */
 	wxString player(playerSelection->GetString(playerSelection->GetCurrentSelection()));
     
+	if(replayFilename == "") return;
+	
     Rep2AI rep2ai(replay);
 	                          
     *text << "Creating AI script for " << player << "...\n";
