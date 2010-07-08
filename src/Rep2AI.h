@@ -25,6 +25,8 @@ class Rep2AI {
 		bool runAI();
 		bool findPlayer(char* searchPlayer);
 		bool makeAI();
+		char* getBuildOrderAsText();
+		
 	private:
 		bool notSpam();
 		bool findAttack();
@@ -45,6 +47,8 @@ class Rep2AI {
 		
 		bool buildingAtLocation[350][350]; //keeps track of where things have been built 
 		bool inBase[350][350]; //keeps track of where bases are 
+		
+		char buildOrder[4096];
 
 		int numWorkers;
 		int numExpansions;

@@ -68,6 +68,7 @@ class MainFrame : public wxFrame
         enum {
             ////GUI Enum Control ID Start
             ID_OPEN = 1000,
+            ID_RUN,
             ID_EXIT,
             ID_TEXT,
             ID_PLAYERSELECTION,

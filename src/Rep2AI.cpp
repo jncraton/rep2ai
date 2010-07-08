@@ -21,6 +21,7 @@ Rep2AI::Rep2AI(Replay* replay) {
 	playerID = -1;
 	playerRace = 'N';
 	debugOn = false;
+	buildOrder[0] = 0x00;
 	path = "C:\\Program Files\\Starcraft\\Rep2AI\\";
 }
 
@@ -239,7 +240,11 @@ bool Rep2AI::convertActionsToAI() {
 					else {
 						ai.safeBuildOne(action.recipient, 80);
 					}
-					if(BOSupply > 0) printf("%d %s\n",BOSupply,unitToString[action.recipient].c_str());
+					
+					// Store the build order
+					if(BOSupply > 0) {
+                        sprintf(buildOrder,"%s%d %s\n",buildOrder, BOSupply, unitToString[action.recipient].c_str());
+                    }
 			}
 			if(action.type == Merge_archon) {
 					ai.safeTrainOne(archon);
@@ -333,4 +338,9 @@ void Rep2AI::defineBase(int x, int y) {
 ////////////////////////////////////////////////////////////////////////////////
 bool Rep2AI::isBase(int x, int y) {
 	return inBase[x][y];
+}
+
+////////////////////////////////////////////////////////////////////////////////
+char* Rep2AI::getBuildOrderAsText() {
+    return buildOrder;
 }

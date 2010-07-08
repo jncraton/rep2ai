@@ -118,6 +118,8 @@ void MainFrame::SelectPlayer( wxCommandEvent& event ) {
 
     *text << "Writing aiscript.bin...\n";
 	rep2ai.makeAI();
+	
+    *text << "Build Order:\n" << rep2ai.getBuildOrderAsText();
 }
 
 void MainFrame::RunAI( wxCommandEvent& event ) {
