@@ -25,6 +25,7 @@ class Rep2AI {
 		bool runAI();
 		bool findPlayer(char* searchPlayer);
 		bool makeAI();
+		bool saveToAiscript(char* filename);
 		char* getBuildOrderAsText();
 		
 	private:

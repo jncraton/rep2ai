@@ -10,6 +10,7 @@
 BEGIN_EVENT_TABLE(MainFrame,wxFrame)
     EVT_MENU(ID_EXIT, MainFrame::OnExit)
     EVT_MENU(ID_OPEN, MainFrame::OpenReplay)
+    EVT_MENU(ID_SAVE_AISCRIPT, MainFrame::SaveToAiscript)
     EVT_BUTTON(ID_RUN_BUTTON, MainFrame::RunAI)
     EVT_CLOSE(MainFrame::OnClose)
     EVT_COMBOBOX(ID_PLAYERSELECTION, MainFrame::SelectPlayer)
@@ -46,6 +47,7 @@ void MainFrame::CreateGUIControls() {
 
     fileMenu = new wxMenu();
     fileMenu->Append(ID_OPEN, _T("&Open"));
+    fileMenu->Append(ID_SAVE_AISCRIPT, _T("&Save to aiscript.bin"));
     fileMenu->Append(ID_EXIT, _T("&Quit"));
     menuBar->Append(fileMenu, _T("&File"));
  
@@ -121,6 +123,22 @@ void MainFrame::OpenReplay( wxCommandEvent& event ) {
     playerSelected = false;
 }
 
+void MainFrame::SaveToAiscript( wxCommandEvent& event ) {
+    /**
+    *   Event handler opening a replay
+    */
+    if ( replayOpen && playerSelected ) {
+        wxFileDialog file_dialog(this, wxT("Select a replay to open"), wxT(""), wxT("aiscript.bin"), wxT("*.bin"), wxSAVE);
+        file_dialog.ShowModal();
+        
+        wxString filename = file_dialog.GetPath();
+
+        *text << "Saving AI as " << filename << "...\n";
+        
+        rep2ai->saveToAiscript((char*)filename.c_str());
+    }
+}
+
 void MainFrame::SelectPlayer( wxCommandEvent& event ) {
     /**
     *   Event handler for selecting a player
@@ -129,16 +147,16 @@ void MainFrame::SelectPlayer( wxCommandEvent& event ) {
     
 	if(replayFilename == "") return;
 	
-    Rep2AI rep2ai(replay);
+    rep2ai = new Rep2AI(replay);
 	                          
     *text << "Creating AI script for " << player << "...\n";
 
-	rep2ai.findPlayer((char*)player.c_str());
+	rep2ai->findPlayer((char*)player.c_str());
 
     *text << "Writing aiscript.bin...\n";
-	rep2ai.makeAI();
+	rep2ai->makeAI();
 	
-    *text << "Build Order:\n" << rep2ai.getBuildOrderAsText();
+    *text << "Build Order:\n" << rep2ai->getBuildOrderAsText();
     
     playerSelected = true;
 }
@@ -148,7 +166,6 @@ void MainFrame::RunAI( wxCommandEvent& event ) {
     *   Event handler for running the AI
     */
     if ( replayOpen && playerSelected ) {
-        Rep2AI rep2ai(replay);
-        rep2ai.runAI();
+        rep2ai->runAI();
     }
 }

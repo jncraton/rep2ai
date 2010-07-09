@@ -1,51 +1,55 @@
-# .8.0
+# 0.8.1
+
+- Can now directly save to aiscript.bin
+
+# 0.8.0
 
 - Added GUI interface
 - More complete unit lookup table
 
-# .7.3
+# 0.7.3
 
 - now writes script to an SEMPQ for quick injection
 - fixed several bugs
 - added -r flag to automatically inject script and run SC
 
-# .7.2
+# 0.7.2
 
 - smaller binary size due to added compiler optimizations
 - many source code changes
 
-# .7.1
+# 0.7.1
 
 - minor bugfixes
 
-# .7.0
+# 0.7.0
 
 - completely changed replay analyzer to not require LMRR
 
-# .6.2
+# 0.6.2
 
 - expansion bug fixes
 
-# .6.1
+# 0.6.1
 
 - Added support for technology upgrades (siege mode, lurker aspect, etc)
 
-# .6.0
+# 0.6.0
 
 - First publicly released version
 
-# .5
+# 0.5
 
 - Added support for Zerg
 
-# .4
+# 0.4
 
 - Added support for Terran
 
-# .3
+# 0.3
 
 - Basic support for protoss buildings and units
 
-# .1
+# 0.1
 
 - Original perl script

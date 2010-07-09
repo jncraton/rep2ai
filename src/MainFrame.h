@@ -45,6 +45,7 @@ class MainFrame : public wxFrame
         void OnExit(wxCommandEvent& event);
         void SelectPlayer(wxCommandEvent& event);
         void OpenReplay(wxCommandEvent& event);
+        void SaveToAiscript(wxCommandEvent& event);
         void RunAI(wxCommandEvent& event);
 
         DECLARE_EVENT_TABLE();
@@ -66,6 +67,7 @@ class MainFrame : public wxFrame
         
         // rep2ai
         Replay* replay;
+        Rep2AI* rep2ai;
         wxString replayFilename;
         
     private:
@@ -73,6 +75,7 @@ class MainFrame : public wxFrame
         enum {
             ////GUI Enum Control ID Start
             ID_OPEN = 1000,
+            ID_SAVE_AISCRIPT,
             ID_RUN,
             ID_RUN_BUTTON,
             ID_EXIT,

@@ -344,3 +344,9 @@ bool Rep2AI::isBase(int x, int y) {
 char* Rep2AI::getBuildOrderAsText() {
     return buildOrder;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+bool Rep2AI::saveToAiscript(char* filename) {
+    ai.saveToAiscript(filename);
+    return true;
+}
