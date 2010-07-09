@@ -1,6 +1,7 @@
 # .8.0
 
 - Added GUI interface
+- More complete unit lookup table
 
 # .7.3
 
