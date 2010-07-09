@@ -110,6 +110,46 @@ bool AI::write() {
 	return true;
 }
 
+
+////////////////////////////////////////////////////////////////////////////////
+
+/* TODO: These methods should be refactored to remove duplicate code */
+
+bool AI::saveToAiscript(char* filename) {
+	int length = cursor + 1 + 4; // the standard intro is added
+	char closeToss[20] = {'P','M','C','x',0x04,0x00,0x00,0x00,0x40,0x05,0x00,0x00,
+			0x05,0x00,0x00,0x00,0x00,0x00,0x00,0x00}; 
+	char closeTerran[20] = {'T','M','C','x',0x04,0x00,0x00,0x00,0x3F,0x05,0x00,0x00,
+			0x05,0x00,0x00,0x00,0x00,0x00,0x00,0x00}; 
+	char closeZerg[20] = {'Z','M','C','x',0x04,0x00,0x00,0x00,0x41,0x05,0x00,0x00,
+			0x05,0x00,0x00,0x00,0x00,0x00,0x00,0x00}; 
+	FILE * aiscript;
+	aiscript = fopen(filename,"wb");
+	
+	// write the length of aiscript.bin
+	fwrite(&length, sizeof(int), 1, aiscript);
+	
+	// write the script
+	fwrite(script, sizeof(char), cursor + 1, aiscript);
+	
+	// close the script
+	switch(race) {	
+		case 'P':
+			fwrite(closeToss, sizeof(char), 20, aiscript);
+		break;
+		case 'T':
+			fwrite(closeTerran, sizeof(char), 20, aiscript);
+		break;
+		case 'Z':
+			fwrite(closeZerg, sizeof(char), 20, aiscript);
+		break;
+	}
+	
+	// close the file
+	fclose(aiscript);
+	return true;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 bool AI::run() {

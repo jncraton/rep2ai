@@ -46,6 +46,7 @@ class AI
 		void setMax(char number, int unit);
 		void standardIntro();
 		bool write();
+		bool saveToAiscript(char* filename);
 		bool run();
 		void display();
 		void add(char hexVal);
