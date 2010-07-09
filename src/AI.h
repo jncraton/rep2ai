@@ -115,16 +115,16 @@ const char ga = 2;
 const char aa = 3;
 
 const string unitToString[256] = {
-"Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", //16
+"Marine", "Ghost", "Vulture", "Goliath", "Unknown Unit", "Tank", "Unknown Unit", "SCV", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", //16
 "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", //32
-"Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", //48
+"Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Drone", "Overlord", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", //48
 "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", //64
 "Probe", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", //80
 "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", //96
-"Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", //112
-"Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", //128
-"Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", //144
-"Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Nexus", "Robotics Facility", "Pylon", "Assimilator", "Unknown Unit", "Observatory", //160
+"Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Command Center", "Comsat", "Unknown Unit", "Supply Depot", "Refinery", "Barracks", //112
+"Academy", "Factory", "Starport", "Control Tower", "Science Facility", "Covert Ops", "Physics Lab", "Unknown Unit", "Machine Shop", "Unknown Unit", "Engineering Bay", "Armory", "Missile Turret", "Bunker", "Unknown Unit", "Unknown Unit", //128
+"Unknown Unit", "Unknown Unit", "Unknown Unit", "Hatchery", "Lair", "Hive", "Nydus Canal", "Hydralisk Den", "Defiler Mound", "Greater Spire", "Queen's Nest", "Evolution Chamber", "Ultralisk Cavern", "Spire", "Spawning Pool", "Creep Colony", //144
+"Spore Colony", "Unknown Unit", "Sunken Colony", "Unknown Unit", "Unknown Unit", "Extractor", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Nexus", "Robotics Facility", "Pylon", "Assimilator", "Unknown Unit", "Observatory", //160
 "Gateway", "Unknown Unit", "Photon Cannon", "Citadel of Adun", "Cybernetics Core", "Templar Archives", "Forge", "Stargate", "Unknown Unit", "Fleet Beacon", "Arbiter Tribunal", "Robotics Support Bay", "Shield Battery", "Unknown Unit", "Unknown Unit", "Unknown Unit", //176
 "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", //192
 "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", "Unknown Unit", //208
@@ -172,11 +172,11 @@ const int protossUnits[11] = {zealot, dragoon, dark_templar, high_templar, archo
 const int protossTotalUnits = 11;
 
 //Terran
-const int command_center = 106;
 const int scv = 7;
+const int command_center = 106;
+const int comsat_station = 107;
 const int supply_depot = 109;
 const int refinery = 110;
-const int comsat_station = 107;
 const int barracks = 111;
 const int academy = 112;
 const int factory = 113;
