@@ -10,6 +10,7 @@
 BEGIN_EVENT_TABLE(MainFrame,wxFrame)
     EVT_MENU(ID_EXIT, MainFrame::OnExit)
     EVT_MENU(ID_OPEN, MainFrame::OpenReplay)
+    EVT_BUTTON(ID_RUN_BUTTON, MainFrame::RunAI)
     EVT_CLOSE(MainFrame::OnClose)
     EVT_COMBOBOX(ID_PLAYERSELECTION, MainFrame::SelectPlayer)
 END_EVENT_TABLE()
@@ -21,6 +22,8 @@ MainFrame::MainFrame(wxWindow *parent, wxWindowID id, const wxString &title, con
     */
     CreateGUIControls();
     replayFilename = "";
+    playerSelected = false;
+    replayOpen = false;
 }
 
 MainFrame::~MainFrame() {
@@ -113,6 +116,9 @@ void MainFrame::OpenReplay( wxCommandEvent& event ) {
             playerSelection->Append(wxString(replay->playerName[i]));
         }
     }
+    
+    replayOpen = true;
+    playerSelected = false;
 }
 
 void MainFrame::SelectPlayer( wxCommandEvent& event ) {
@@ -133,12 +139,16 @@ void MainFrame::SelectPlayer( wxCommandEvent& event ) {
 	rep2ai.makeAI();
 	
     *text << "Build Order:\n" << rep2ai.getBuildOrderAsText();
+    
+    playerSelected = true;
 }
 
 void MainFrame::RunAI( wxCommandEvent& event ) {
     /**
     *   Event handler for running the AI
     */
-    Rep2AI rep2ai(replay);
-	rep2ai.runAI();
+    if ( replayOpen && playerSelected ) {
+        Rep2AI rep2ai(replay);
+        rep2ai.runAI();
+    }
 }

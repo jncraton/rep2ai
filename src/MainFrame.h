@@ -80,6 +80,9 @@ class MainFrame : public wxFrame
             ID_PLAYERSELECTION,
             ID_STATUSBAR
         };
+        
+        bool playerSelected;
+        bool replayOpen;
 };
 
 #endif
