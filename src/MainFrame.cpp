@@ -5,6 +5,8 @@
  
 #include "MainFrame.h"
 
+#include "icons.h"
+
 BEGIN_EVENT_TABLE(MainFrame,wxFrame)
     EVT_MENU(ID_EXIT, MainFrame::OnExit)
     EVT_MENU(ID_OPEN, MainFrame::OpenReplay)
@@ -44,27 +46,35 @@ void MainFrame::CreateGUIControls() {
     fileMenu->Append(ID_EXIT, _T("&Quit"));
     menuBar->Append(fileMenu, _T("&File"));
  
-    SetMenuBar(menuBar);    
+    SetMenuBar(menuBar);
     
-    // Panel
+    // Main Panel
+    sizer = new wxBoxSizer(wxVERTICAL);
     panel = new wxPanel(this);
+    panel->SetSizer(sizer);
+
+    // Controls
+    controlsSizer = new wxBoxSizer(wxHORIZONTAL);
+    sizer->Add(controlsSizer,0);
+
+    // Player Selection
+    playerSelectionLabel = new wxStaticText(panel, -1, wxT("Player:"));
+    playerSelection = new wxComboBox(panel, ID_PLAYERSELECTION, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL,wxCB_READONLY|wxCB_SORT);
+    playerSelection->Append(wxT("Open a Replay first"));
+    
+    controlsSizer->Add(playerSelectionLabel);
+    controlsSizer->Add(playerSelection);
+    
+    // Run Button
+    
+    runButton = new wxBitmapButton(panel, ID_RUN_BUTTON, wxBitmap(controller_xpm));
+    controlsSizer->Add(runButton);
     
     // Text Area
 
     text = new wxTextCtrl(panel, ID_TEXT, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxVSCROLL|wxHSCROLL|wxNO_BORDER|wxTE_READONLY|wxTE_MULTILINE);
-                                                          
-    // Player Selection Box  
-    playerSelection = new wxComboBox(panel, ID_PLAYERSELECTION, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL,wxCB_READONLY|wxCB_SORT);
-    playerSelection->Append(wxT("Open a Replay first"));
-    
-    // Sizer
-    
-    sizer = new wxBoxSizer(wxVERTICAL);
-    sizer->Add(playerSelection);
-    sizer->Add(text,1,wxEXPAND);
-    panel->SetSizer(sizer);
-    
-}
+    sizer->Add(text,1,wxEXPAND|wxALL);
+}              
 
 void MainFrame::OnClose(wxCloseEvent& event) {
     /**

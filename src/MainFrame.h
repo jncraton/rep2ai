@@ -21,6 +21,8 @@
 #include <wx/statusbr.h>
 #include <wx/stattext.h>
 #include <wx/combobox.h>
+#include <wx/tbarbase.h>
+#include <wx/toolbar.h>
 #include <wx/panel.h>
 #include <wx/sizer.h>
               
@@ -56,7 +58,10 @@ class MainFrame : public wxFrame
         wxMenu* fileMenu;
         wxPanel* panel;
         wxBoxSizer* sizer;
+        wxBoxSizer* controlsSizer;
         wxComboBox* playerSelection;
+        wxStaticText* playerSelectionLabel;
+        wxBitmapButton* runButton;
         wxTextCtrl* text;
         
         // rep2ai
@@ -69,6 +74,7 @@ class MainFrame : public wxFrame
             ////GUI Enum Control ID Start
             ID_OPEN = 1000,
             ID_RUN,
+            ID_RUN_BUTTON,
             ID_EXIT,
             ID_TEXT,
             ID_PLAYERSELECTION,
