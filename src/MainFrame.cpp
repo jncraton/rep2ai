@@ -10,6 +10,7 @@
 BEGIN_EVENT_TABLE(MainFrame,wxFrame)
     EVT_MENU(ID_EXIT, MainFrame::OnExit)
     EVT_MENU(ID_OPEN, MainFrame::OpenReplay)
+    EVT_MENU(ID_RUN, MainFrame::RunAI)
     EVT_MENU(ID_SAVE_AISCRIPT, MainFrame::SaveToAiscript)
     EVT_BUTTON(ID_RUN_BUTTON, MainFrame::RunAI)
     EVT_CLOSE(MainFrame::OnClose)
@@ -47,6 +48,7 @@ void MainFrame::CreateGUIControls() {
 
     fileMenu = new wxMenu();
     fileMenu->Append(ID_OPEN, _T("&Open"));
+    fileMenu->Append(ID_RUN, _T("&Run"));
     fileMenu->Append(ID_SAVE_AISCRIPT, _T("&Save to aiscript.bin"));
     fileMenu->Append(ID_EXIT, _T("&Quit"));
     menuBar->Append(fileMenu, _T("&File"));
