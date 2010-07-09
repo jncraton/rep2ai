@@ -128,7 +128,7 @@ void MainFrame::SaveToAiscript( wxCommandEvent& event ) {
     *   Event handler opening a replay
     */
     if ( replayOpen && playerSelected ) {
-        wxFileDialog file_dialog(this, wxT("Select a replay to open"), wxT(""), wxT("aiscript.bin"), wxT("*.bin"), wxSAVE);
+        wxFileDialog file_dialog(this, wxT("Select location to save to"), wxT(""), wxT("aiscript.bin"), wxT("*.bin"), wxSAVE);
         file_dialog.ShowModal();
         
         wxString filename = file_dialog.GetPath();
