@@ -1,6 +1,6 @@
 # rep2ai 
 
-Version 0.8.0 by Jon Craton
+Version 0.8.1 by Jon Craton
 http://joncraton.org/projects/rep2ai
 
 The purpose of this program is to convert a Starcraft replay into an AI
