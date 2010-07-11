@@ -8,8 +8,8 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	printf("%s by Jon Craton (joncraton.org)\n", NAME);
-	printf("usage:  rep2ai -f [file] -p [player] -r -d -c\n \n");
+	printf("%s by %s (%s)\n", NAME, AUTHOR, WEBSITE);
+	printf("usage:  rep2ai -f [file] -p [player] -r -d -c\n\n");
 
 	char* filename = "";
 	char* player = "";
