@@ -40,7 +40,7 @@ void MainFrame::CreateGUIControls() {
     */
     
     // Set window properties and title bar
-    SetTitle(wxT("rep2ai"));
+    SetTitle(wxT(NAME));
     SetIcon(wxNullIcon);
     
     // Menu Bar

@@ -10,6 +10,8 @@
 
 using namespace std;
 
+#define NAME "rep2ai 0.8.1"
+
 class Rep2AI {
 	struct action {
 		char type;
