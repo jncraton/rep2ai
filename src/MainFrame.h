@@ -25,6 +25,7 @@
 #include <wx/toolbar.h>
 #include <wx/panel.h>
 #include <wx/sizer.h>
+#include <wx/html/htmlwin.h>
               
 #include "AI.h"
 #include "Replay.h"
@@ -40,13 +41,14 @@ class MainFrame : public wxFrame
         virtual ~MainFrame();
 
     private:
-        // Event handlers
+        // Event handlers                
         void OnClose(wxCloseEvent& event);
         void OnExit(wxCommandEvent& event);
         void SelectPlayer(wxCommandEvent& event);
         void OpenReplay(wxCommandEvent& event);
         void SaveToAiscript(wxCommandEvent& event);
         void RunAI(wxCommandEvent& event);
+        void About(wxCommandEvent& event);
 
         DECLARE_EVENT_TABLE();
 
@@ -57,6 +59,7 @@ class MainFrame : public wxFrame
         wxStatusBar* statusBar;
         wxMenuBar* menuBar;
         wxMenu* fileMenu;
+        wxMenu* helpMenu;
         wxPanel* panel;
         wxBoxSizer* sizer;
         wxBoxSizer* controlsSizer;
@@ -79,6 +82,7 @@ class MainFrame : public wxFrame
             ID_RUN,
             ID_RUN_BUTTON,
             ID_EXIT,
+            ID_ABOUT,
             ID_TEXT,
             ID_PLAYERSELECTION,
             ID_STATUSBAR

@@ -12,6 +12,7 @@ BEGIN_EVENT_TABLE(MainFrame,wxFrame)
     EVT_MENU(ID_OPEN, MainFrame::OpenReplay)
     EVT_MENU(ID_RUN, MainFrame::RunAI)
     EVT_MENU(ID_SAVE_AISCRIPT, MainFrame::SaveToAiscript)
+    EVT_MENU(ID_ABOUT, MainFrame::About)
     EVT_BUTTON(ID_RUN_BUTTON, MainFrame::RunAI)
     EVT_CLOSE(MainFrame::OnClose)
     EVT_COMBOBOX(ID_PLAYERSELECTION, MainFrame::SelectPlayer)
@@ -52,7 +53,11 @@ void MainFrame::CreateGUIControls() {
     fileMenu->Append(ID_SAVE_AISCRIPT, _T("&Save to aiscript.bin"));
     fileMenu->Append(ID_EXIT, _T("&Quit"));
     menuBar->Append(fileMenu, _T("&File"));
- 
+
+    helpMenu = new wxMenu();
+    helpMenu->Append(ID_ABOUT, _T("&About"));
+    menuBar->Append(helpMenu, _T("&Help"));
+    
     SetMenuBar(menuBar);
     
     // Main Panel
@@ -170,4 +175,27 @@ void MainFrame::RunAI( wxCommandEvent& event ) {
     if ( replayOpen && playerSelected ) {
         rep2ai->runAI();
     }
+}
+
+void MainFrame::About( wxCommandEvent& event ) {
+    /**
+     * Event handler for the about box
+     */
+     
+     wxDialog about(this, -1, wxString("About"));
+     wxBoxSizer about_sizer(wxVERTICAL);
+     wxHtmlWindow about_html(&about);
+     
+     about.SetSizer(&about_sizer);
+    
+     about_html.SetPage(
+         wxString("<h1>")+wxString(NAME)+wxString("</h1>")+
+         wxString("<p>By: ")+wxString(AUTHOR)+wxString("</p>")+
+         wxString("<p><a target=\"_blank\" href=\"")+wxString(WEBSITE)+wxString("\">")+
+         wxString(WEBSITE)+wxString("</a></p>")
+         );
+     
+     about_sizer.Add(&about_html,1,wxEXPAND);
+
+     about.ShowModal();
 }
