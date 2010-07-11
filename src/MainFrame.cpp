@@ -12,6 +12,7 @@ BEGIN_EVENT_TABLE(MainFrame,wxFrame)
     EVT_MENU(ID_OPEN, MainFrame::OpenReplay)
     EVT_MENU(ID_RUN, MainFrame::RunAI)
     EVT_MENU(ID_SAVE_AISCRIPT, MainFrame::SaveToAiscript)
+    EVT_MENU(ID_WEBSITE, MainFrame::Website)
     EVT_MENU(ID_ABOUT, MainFrame::About)
     EVT_BUTTON(ID_RUN_BUTTON, MainFrame::RunAI)
     EVT_CLOSE(MainFrame::OnClose)
@@ -55,6 +56,7 @@ void MainFrame::CreateGUIControls() {
     menuBar->Append(fileMenu, _T("&File"));
 
     helpMenu = new wxMenu();
+    helpMenu->Append(ID_WEBSITE, _T("&Website"));
     helpMenu->Append(ID_ABOUT, _T("&About"));
     menuBar->Append(helpMenu, _T("&Help"));
     
@@ -197,4 +199,11 @@ void MainFrame::About( wxCommandEvent& event ) {
      about_sizer.Add(&about_html,1,wxEXPAND);
 
      about.ShowModal();
+}
+
+void MainFrame::Website( wxCommandEvent& event ) {
+    /**
+     * Event handler for website
+     */
+     wxLaunchDefaultBrowser(WEBSITE);
 }

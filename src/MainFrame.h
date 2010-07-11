@@ -49,6 +49,7 @@ class MainFrame : public wxFrame
         void SaveToAiscript(wxCommandEvent& event);
         void RunAI(wxCommandEvent& event);
         void About(wxCommandEvent& event);
+        void Website(wxCommandEvent& event);
 
         DECLARE_EVENT_TABLE();
 
@@ -82,6 +83,7 @@ class MainFrame : public wxFrame
             ID_RUN,
             ID_RUN_BUTTON,
             ID_EXIT,
+            ID_WEBSITE,
             ID_ABOUT,
             ID_TEXT,
             ID_PLAYERSELECTION,
