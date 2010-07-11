@@ -191,8 +191,7 @@ void MainFrame::About( wxCommandEvent& event ) {
      about_html.SetPage(
          wxString("<h1>")+wxString(NAME)+wxString("</h1>")+
          wxString("<p>By: ")+wxString(AUTHOR)+wxString("</p>")+
-         wxString("<p><a target=\"_blank\" href=\"")+wxString(WEBSITE)+wxString("\">")+
-         wxString(WEBSITE)+wxString("</a></p>")
+         wxString("<p>")+wxString(WEBSITE)+wxString("</p>")
          );
      
      about_sizer.Add(&about_html,1,wxEXPAND);
