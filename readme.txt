@@ -7,11 +7,11 @@ The purpose of this program is to convert a Starcraft replay into an AI
 script which can be injected into the game. This is helpful for learning
 new builds or creating AIs for campaigns or just for fun.
 
-All you need to do is provide rep2ai with a replay file and a player 
-name. It will take care of the rest. It will output a new aiscript.bin 
-file which can be injected into the game in several different ways.
+With the GUI version, converting a replay is simple.
 
-Syntax: rep2ai -f filename -p player -r
-
--r 
-    Run - This causes SC to run with the new script automatically
+1. Run rep2ai.exe
+2. File->Open
+3. Select the replay of your choice
+4. Select the player you want from the dropdown
+5. Use File->Run to launch StarCraft with this AI, or use File->Save to 
+aiscript.bin to export the ai for modding
