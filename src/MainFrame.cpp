@@ -28,6 +28,9 @@ MainFrame::MainFrame(wxWindow *parent, wxWindowID id, const wxString &title, con
     replayFilename = "";
     playerSelected = false;
     replayOpen = false;
+    
+    replay = NULL;
+    rep2ai = NULL;
 }
 
 MainFrame::~MainFrame() {
@@ -116,6 +119,8 @@ void MainFrame::OpenReplay( wxCommandEvent& event ) {
     replayFilename = file_dialog.GetPath();
     
     *text << "Opening replay " << replayFilename << "...\n";
+    
+    if ( replay != NULL ) free(replay);
     
     replay = new Replay((char*)replayFilename.c_str());
     
