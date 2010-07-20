@@ -69,3 +69,48 @@ bool ActionList::hasNext() {
      */
 	return p_current->p_next;
 }
+
+Action ActionList::previous() {
+    /**
+     * previous
+     *
+     * There is no pointer for this, so we have to search the list
+     */
+
+    Action * current = p_current;
+    
+    reset();
+    
+    while ( p_current->p_next != current ) {
+        next();
+    }
+    
+    return *p_current;
+}
+
+Action ActionList::removeCurrent() {
+    /**              
+     * removeCurrent
+     *
+     * removes the current action
+     * the previous action becomes the new current action
+     */
+    
+    previous();
+    
+    Action * current = p_current->p_next;
+    
+    p_current->p_next = p_current->p_next->p_next;
+    
+    free(current);
+    
+	return *p_current;
+}
+
+void ActionList::cleanSpam() {
+    /**
+     * cleanSpam
+     */
+     
+	return;
+}
