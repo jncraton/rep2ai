@@ -245,7 +245,7 @@ bool Rep2AI::convertActionsToAI() {
             
             // Store the build order
             if(BOSupply > 0) {
-                sprintf(buildOrder,"%s%d %s (%d)\n",buildOrder, BOSupply, unitToString[action.recipient].c_str(),action.recipient);
+                sprintf(buildOrder,"%s%d %s\n",buildOrder, BOSupply, unitToString[action.recipient].c_str());
             }
         }                                                                              
         if(action.type == Merge_archon) {
