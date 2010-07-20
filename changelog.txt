@@ -1,5 +1,8 @@
 # 0.8.2
 - Slightly improved spam detection algorithm
+- Uses few workers at expansions
+- Fixed bug relating to gas at expansions
+- Improved final look attack
 - Fixed several memory leaks 
 - Fixed a bug where a replay could only be analyzed for one player
 
