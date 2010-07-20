@@ -64,6 +64,7 @@ class AI
 		int worker;
 		int townhall;
 		int farm;
+		int gas;
 		
 		//address used by mulitun commands
 		int multiWorkersAddress;

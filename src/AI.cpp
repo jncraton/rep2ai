@@ -50,16 +50,19 @@ void AI::setRaceDefaults() {
 		worker = probe;
 		townhall = nexus;
 		farm = pylon;
+		gas = assimilator;
 	}
 	if(race == 'T') {
 		worker = scv;
 		townhall = command_center;
 		farm = supply_depot;
+		gas = refinery;
 	}
 	if(race == 'Z') {
 		worker = drone;
 		townhall = hatchery;
 		farm = overlord;
+		gas = extractor;
 	}
 }
 
@@ -588,9 +591,9 @@ void AI::multiExpand() {
      */
 	multiExpandAddress = cursor + 1 + 4;
 	add(start_town); 
-	build(1, townhall, 2);
+	build(1, townhall, 50);
 	waitBuild(1, townhall);
-	for(int i = 1; i <= 20; i++) {
+	for(int i = 1; i <= 15; i++) {
 		build(i,worker,1);
 		waitBuild(i,worker);
 	}
