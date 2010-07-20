@@ -112,6 +112,13 @@ void ActionList::cleanSpam() {
      * cleanSpam
      */
     
+    int num_units[256];
+    float spam = 0.0;
+    
+    const float spam_threshold = 10.0;
+    const int spam_interval = 10;
+    const float spam_interval_weight = 15.0;
+     
     Action * old_current = p_current; 
     
     reset();
@@ -119,15 +126,26 @@ void ActionList::cleanSpam() {
     FILE * debug;
     debug = fopen("replay.txt","w");
     
-    while(hasNext()) {
-        next();
-        
-        if(p_current->type == Build) {
-            fprintf(debug, p_current->asString);
-        }
-    }
+    int last_build_time = 0;
     
-    fprintf(debug,"test\n");
+    while(hasNext()) {
+        spam = 0.0;
+        
+        next();
+
+        if(p_current->isBuildOrTrain()) {
+            if( p_current->time - last_build_time < spam_interval ) {
+                spam += spam_interval_weight;
+            }
+            last_build_time = p_current->time;
+        }
+        
+        if ( spam > spam_threshold ) {
+            removeCurrent();
+            fprintf(debug, "SPAM:");
+        }
+        fprintf(debug, p_current->asString);
+    }
     
     fclose(debug);
     

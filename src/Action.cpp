@@ -6,6 +6,7 @@ Action::Action() {
      */
 	time = 0;
 	type = 0;
+	asString[0] = 0x00;
 }
 
 Action::~Action() {

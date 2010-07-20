@@ -167,98 +167,97 @@ bool Rep2AI::convertActionsToAI() {
 			printf("Done grabbing actions at %f seconds\n",action.time/ticksPerSecond);
 			break;
 		}
-		//first check to see if the same action has just been performed
-			//selects the action type
-			if(action.type == Train || action.type == Hatch) {
-					//if its a worker, deal with it appropriately
-					if(action.recipient == scv || action.recipient == drone || action.recipient == probe) {
-						if(numWorkers < 11) {
-							numWorkers++;
-							ai.safeBuildOne(action.recipient, 1);
-							BOSupply = numWorkers;
-						}	
-						else if(numWorkers == 11) {
-							ai.multirun(-1);
-							numWorkers = 255;
-						}
-						else {
-							if(BOSupply > BOLength || BOSupply == 0) BOSupply = 0;
-							else BOSupply++;
-						}
-					}	
-					//if its an ovie, build it instead of training it	
-					else if(action.recipient == overlord) {
-						action.type = Build;
-					}	
-					//otherwise just add the train opcode and increment the number of that unit
-					else {
-						ai.safeTrainOne(action.recipient);
-					}	
-			}
-			if(action.type == Build || action.type == Morph) { //covers build, warp, morph, etc...
-					if(action.recipient == ignoredAction) {
-					}
-					//expand if the building is a townhall
-					else if(action.recipient == nexus || action.recipient == command_center) {
-						numExpansions++;
-						ai.expand(numExpansions,-1);
-					}
-					// treat hatcheries special because they aren't neccessarily an expansion
-					else if(action.recipient == hatchery) {
-						if(!isBase(action.x, action.y)) {
-							numExpansions++;
-							ai.expand(numExpansions,-1);
-						} else {
-							ai.safeBuildOne(action.recipient, 80);
-						}
-						defineBase(action.x, action.y);
-					}	
-					//make sure the script doesn't accidentally create more than one gas or comsat
-					else if(action.recipient == assimilator || action.recipient == refinery || action.recipient == extractor) {
-						if(noGasYet) {
-							ai.safeBuildOne(action.recipient, 80);
-							noGasYet = false;
-						}
-					}
-					else if(action.recipient == comsat_station) {
-						if(noComsatYet) {
-							ai.safeBuildOne(action.recipient, 80);
-							noComsatYet = false;
-						}
-					}
-					//check if farms timing needs to be started when they build a farm
-					else if(action.recipient == pylon || action.recipient == supply_depot || action.recipient == overlord) {
-						if(!farmsDone) {
-							if(action.time > 5000) {
-								ai.add(farms_timing);
-								printf("Automatic farms construction initialized at %f seconds.\n",action.time/ticksPerSecond);
-								farmsDone = true; //there's no reason to keep manually building farms after farms_timing
-							} 
-							else {
-								ai.safeBuildOne(action.recipient, 80);
-							}	
-						}
-					}
-					//otherwise just build the unit	
-					else {
-						ai.safeBuildOne(action.recipient, 80);
-					}
-					
-					// Store the build order
-					if(BOSupply > 0) {
-                        sprintf(buildOrder,"%s%d %s (%d)\n",buildOrder, BOSupply, unitToString[action.recipient].c_str(),action.recipient);
-                    }
-			}                                                                              
-			if(action.type == Merge_archon) {
-					ai.safeTrainOne(archon);
-			}
-			if(action.type == Research) {
-					ai.safeTech(action.recipient,2);
-			}
-			if(action.type == DoAttack) {
-					ai.doAttack();
-					printf("First attack inserted at action %f seconds.\n",action.time/ticksPerSecond);
-			}
+        //selects the action type
+        if(action.type == Train || action.type == Hatch) {
+            //if its a worker, deal with it appropriately
+            if(action.recipient == scv || action.recipient == drone || action.recipient == probe) {
+                if(numWorkers < 11) {
+                    numWorkers++;
+                    ai.safeBuildOne(action.recipient, 1);
+                    BOSupply = numWorkers;
+                }	
+                else if(numWorkers == 11) {
+                    ai.multirun(-1);
+                    numWorkers = 255;
+                }
+                else {
+                    if(BOSupply > BOLength || BOSupply == 0) BOSupply = 0;
+                    else BOSupply++;
+                }
+            }	
+            //if its an ovie, build it instead of training it	
+            else if(action.recipient == overlord) {
+                action.type = Build;
+            }	
+            //otherwise just add the train opcode and increment the number of that unit
+            else {
+                ai.safeTrainOne(action.recipient);
+            }	
+        }
+        if(action.type == Build || action.type == Morph) { //covers build, warp, morph, etc...
+            if(action.recipient == ignoredAction) {
+            }
+            //expand if the building is a townhall
+            else if(action.recipient == nexus || action.recipient == command_center) {
+                numExpansions++;
+                ai.expand(numExpansions,-1);
+            }
+            // treat hatcheries special because they aren't neccessarily an expansion
+            else if(action.recipient == hatchery) {
+                if(!isBase(action.x, action.y)) {
+                    numExpansions++;
+                    ai.expand(numExpansions,-1);
+                } else {
+                    ai.safeBuildOne(action.recipient, 80);
+                }
+                defineBase(action.x, action.y);
+            }	
+            //make sure the script doesn't accidentally create more than one gas or comsat
+            else if(action.recipient == assimilator || action.recipient == refinery || action.recipient == extractor) {
+                if(noGasYet) {
+                    ai.safeBuildOne(action.recipient, 80);
+                    noGasYet = false;
+                }
+            }
+            else if(action.recipient == comsat_station) {
+                if(noComsatYet) {
+                    ai.safeBuildOne(action.recipient, 80);
+                    noComsatYet = false;
+                }
+            }
+            //check if farms timing needs to be started when they build a farm
+            else if(action.recipient == pylon || action.recipient == supply_depot || action.recipient == overlord) {
+                if(!farmsDone) {
+                    if(action.time > 5000) {
+                        ai.add(farms_timing);
+                        printf("Automatic farms construction initialized at %f seconds.\n",action.time/ticksPerSecond);
+                        farmsDone = true; //there's no reason to keep manually building farms after farms_timing
+                    } 
+                    else {
+                        ai.safeBuildOne(action.recipient, 80);
+                    }	
+                }
+            }
+            //otherwise just build the unit	
+            else {
+                ai.safeBuildOne(action.recipient, 80);
+            }
+            
+            // Store the build order
+            if(BOSupply > 0) {
+                sprintf(buildOrder,"%s%d %s (%d)\n",buildOrder, BOSupply, unitToString[action.recipient].c_str(),action.recipient);
+            }
+        }                                                                              
+        if(action.type == Merge_archon) {
+                ai.safeTrainOne(archon);
+        }
+        if(action.type == Research) {
+                ai.safeTech(action.recipient,2);
+        }
+        if(action.type == DoAttack) {
+                ai.doAttack();
+                printf("First attack inserted at action %f seconds.\n",action.time/ticksPerSecond);
+        }
 	}
 	int finalLoop = ai.getCursorAddress() + 1 + 4;
 	ai.expand(99, -1);
