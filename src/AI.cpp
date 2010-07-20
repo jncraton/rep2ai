@@ -1,9 +1,10 @@
 #include "AI.h"
 #include "sempq.h"
 
-////////////////////////////////////////////////////////////////////////////////
-
 AI::AI() {
+    /**
+     * AI
+     */
 	cursor = -1;
 	for(int i = 0; i <= 255; i++) {
 		totalUnits[i] = 0;
@@ -20,27 +21,31 @@ AI::AI() {
 	debugOn=false;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 AI::~AI() {
+    /**
+     * ~AI
+     */
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::debugMode() {
+    /**
+     * debugMode
+     */
 	debugOn = true;
 }
 	
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::setRace(char newRace) {
+    /**
+     * setRace
+     */
 	race = newRace;
 	setRaceDefaults();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::setRaceDefaults() {
+    /**
+     * setRaceDefaults
+     */
 	if(race == 'P') {
 		worker = probe;
 		townhall = nexus;
@@ -58,9 +63,10 @@ void AI::setRaceDefaults() {
 	}
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool AI::write() {
+    /**
+     * write
+     */
 	int length = cursor + 1 + 4; // the standard intro is added
 	char closeToss[20] = {'P','M','C','x',0x04,0x00,0x00,0x00,0x40,0x05,0x00,0x00,
 			0x05,0x00,0x00,0x00,0x00,0x00,0x00,0x00}; 
@@ -116,6 +122,9 @@ bool AI::write() {
 /* TODO: These methods should be refactored to remove duplicate code */
 
 bool AI::saveToAiscript(char* filename) {
+    /**
+     * Saves the ai to aiscript.bin
+     */
 	int length = cursor + 1 + 4; // the standard intro is added
 	char closeToss[20] = {'P','M','C','x',0x04,0x00,0x00,0x00,0x40,0x05,0x00,0x00,
 			0x05,0x00,0x00,0x00,0x00,0x00,0x00,0x00}; 
@@ -150,16 +159,18 @@ bool AI::saveToAiscript(char* filename) {
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool AI::run() {
+    /**
+     * run
+     */
 	system("inject.exe");
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::build(char number, int building, char priority) {
+    /**
+     * build
+     */
 	if(number > maxUnits[building]) number = maxUnits[building];
 	if(building == char(photon_cannon)) waitBuild(1, forge);
 	add(0x06); //build command
@@ -169,9 +180,10 @@ void AI::build(char number, int building, char priority) {
 	add(priority);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::train(char number, int unit) {
+    /**
+     * train
+     */
 	if(number > maxUnits[unit]) number = maxUnits[unit];
 	 add(0x4C); //train command
 	 add(number);
@@ -179,9 +191,10 @@ void AI::train(char number, int unit) {
 	 add(0x00); //unit is expecting a word?
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::attackAdd(char number, int unit) {
+    /**
+     * attackAdd
+     */
 	if(number > maxUnits[unit]) number = maxUnits[unit];
 	add(attack_add);
 	add(number);
@@ -189,9 +202,10 @@ void AI::attackAdd(char number, int unit) {
 	add(0x00); //unit is expecting a word?
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::upgrade(char level, char upgrade, char priority) {
+    /**
+     * upgrade
+     */
     add(0x07); //upgrade command
 	add(level);
 	add(upgrade);
@@ -199,9 +213,10 @@ void AI::upgrade(char level, char upgrade, char priority) {
 	add(priority);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::tech(int technology, char priority) {
+    /**
+     * tech
+     */
 	if(!(researchComplete[technology])) {
 		add(0x08); //tech command
 		add(technology);
@@ -211,9 +226,10 @@ void AI::tech(int technology, char priority) {
 	}
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::jump(int address) {
+    /**
+     * jump
+     */
 	add(0x00);
 	char lowByte, highByte;
 	lowByte = address & 0x000000FF;
@@ -222,14 +238,16 @@ void AI::jump(int address) {
 	add(highByte);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::jump(char blockNum) { //overloaded jump to support labeled blocks someday
+    /**
+     * jump
+     */
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::debugJump(int address, string message) {
+    /**
+     * debugJump
+     */
 	add(debug_jump);
 	char lowByte, highByte;
 	lowByte = address & 0x000000FF;
@@ -242,16 +260,18 @@ void AI::debugJump(int address, string message) {
 	add(0x00);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::say(string message) {
+    /**
+     * say
+     */
 	//don't display in game messages in debug mode so SCAIEdit can handle the script
 	if(!debugOn) debugJump(cursor + message.length() + 4 + 1 + 4, message);
 }
 
-//////////////////////// ////////////////////////////////////////////////////////
-
 void AI::multirun(int address) {
+    /**
+     * multirun
+     */
 	if(address == -1) address = multiWorkersAddress;
 	add(0x48);
 	char lowByte, highByte;
@@ -261,9 +281,10 @@ void AI::multirun(int address) {
 	add(highByte);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::expand(char expansion, int address) {
+    /**
+     * expand
+     */
 	if(address == -1) address = multiExpandAddress;
 	add(0x05);
 	add(expansion);
@@ -271,9 +292,10 @@ void AI::expand(char expansion, int address) {
 	add((address & 0x0000FF00) >> 8);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::waitBuild(char number, int building) {
+    /**
+     * waitBuild
+     */
 	if(number > maxUnits[building]) number = maxUnits[building];
 	add(0x09); //wait_build command
 	add(number);
@@ -281,16 +303,18 @@ void AI::waitBuild(char number, int building) {
 	add(0x00);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::buildWaitBuild(char number, int building, char priority) {
+    /**
+     * buildWaitBuild
+     */
 	build(number, building, priority);
 	waitBuild(number, building);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::waitBuildStart(char number, int building) {
+    /**
+     * waitBuildStart
+     */
 	if(number > maxUnits[building]) number = maxUnits[building];
 	add(0x0A); //wait_buildstart command
 	add(number);
@@ -298,9 +322,10 @@ void AI::waitBuildStart(char number, int building) {
 	add(0x00);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::waitTrain(char number, int unit) {
+    /**
+     * waitTrain
+     */
 	if(number > maxUnits[unit]) number = maxUnits[unit];
 	add(wait_train);
 	add(number);
@@ -309,9 +334,10 @@ void AI::waitTrain(char number, int unit) {
 }
 
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::wait(int duration) {
+    /**
+     * wait
+     */
 	add(0x02);
 	char lowByte, highByte;
 	lowByte = duration & 0x000000FF;
@@ -319,40 +345,45 @@ void AI::wait(int duration) {
 	add(lowByte);
 	add(highByte);
 }
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::defineMax(char number, int unit) {
+    /**
+     * defineMax
+     */
 	add(0x4B);
 	add(number);
 	add(unit);
 	add(0x00);
 	maxUnits[unit] = number;
 }
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::defenseUse(char offset, char number, int unit) {
+    /**
+     * defenseUse
+     */
 	add(defenseuse + offset); //offset tells it which type (gg, ag, etc)
 	add(number);
 	add(unit);
 	add(0x00);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::creep(char byte) {
+    /**
+     * creep
+     */
 	add(0x43);
 	add(byte);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::stop() {
+    /**
+     * stop
+     */
 	add(0x24);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::safeBuild(char number, int building, char priority) {
+    /**
+     * safeBuild
+     */
 	if(building == gateway)
 		buildWaitBuild(1, pylon, priority);
 	if(building == cybernetics_core)
@@ -386,16 +417,18 @@ void AI::safeBuild(char number, int building, char priority) {
 	waitBuildStart(number, building);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::safeBuildOne(int building, char priority) {
+    /**
+     * safeBuildOne
+     */
 	totalUnits[building]++;
 	safeBuild(totalUnits[building], building, priority);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::safeTrain(char number, int unit) {
+    /**
+     * safeTrain
+     */
 	switch (unit) {
 		case dark_templar: case high_templar: case archon: case dark_archon:
 			safeBuild(1, templar_archives, 80);
@@ -404,17 +437,19 @@ void AI::safeTrain(char number, int unit) {
 	train(number, unit);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::safeTech(char technology, char priority) {
+    /**
+     * safeTech
+     */
 	switch (technology) {
 	}
 	tech(technology, priority);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::safeTrainOne(int unit) {
+    /**
+     * safeTrainOne
+     */
 	totalUnits[unit]++;
 	safeTrain(char(totalUnits[unit]), unit);
 }
@@ -423,9 +458,10 @@ void AI::setMax(char number, int unit) {
 	maxUnits[unit] = number;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::standardIntro() {
+    /**
+     * standardIntro
+     */
 	add(0x03); //start_town
 	add(0x2B); //transports_off
 	add(0x32); //farms_notiming
@@ -503,36 +539,41 @@ void AI::standardIntro() {
 	waitBuildStart(5, worker);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::add(char hexVal) {
+    /**
+     * add
+     */
 	cursor++;
 	script[cursor] = char(hexVal);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::replace(int address, char hexVal) {
+    /**
+     * replace
+     */
 	script[address] = char(hexVal);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 int AI::getCursorAddress() {
+    /**
+     * getCursorAddress
+     */
 	return cursor;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::display() {
+    /**
+     * display
+     */
 	for(int i = 0; i <= cursor; i++) {
 		cout << int(script[i]) << " ";
 	}
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::multiWorkers() {
+    /**
+     * multiWorkers
+     */
 	multiWorkersAddress = cursor + 1 + 4;
 	for(int i = 1; i <= 25; i++) {
 		build(i,worker,1);
@@ -541,9 +582,10 @@ void AI::multiWorkers() {
 	stop();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::multiExpand() {
+    /**
+     * multiExpand
+     */
 	multiExpandAddress = cursor + 1 + 4;
 	add(start_town); 
 	build(1, townhall, 2);
@@ -555,9 +597,10 @@ void AI::multiExpand() {
 	stop();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void AI::doAttack() {
+    /**
+     * doAttack
+     */
 	//attacks with all the military units it thinks it has
 	//it first runs train and wait_train to make sure it really has them
 	//it then runs attack_add

@@ -1,8 +1,9 @@
 #include "Rep2AI.h"
 
-////////////////////////////////////////////////////////////////////////////////
-
 Rep2AI::Rep2AI(Replay* replay) {
+    /**
+     * Rep2AI
+     */
 	this->replay = replay;
 	for(int i = 0; i < 256; i++) {
 		attacks[i] = 0;
@@ -35,23 +36,26 @@ bool Rep2AI::makeAI() {
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool Rep2AI::runAI() {
+    /**
+     * runAI
+     */
 	if(!ai.run()) return 0;
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Rep2AI::debugMode() {
+    /**
+     * debugMode
+     */
 	debugOn = true;
 	ai.debugMode();
 }	
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool Rep2AI::findPlayer(char* searchPlayer) {
+    /**
+     * findPlayer
+     */
 	char* playersByID[8];
 	int numPlayers = 0;
 	if(!strcmp(searchPlayer,"")) searchPlayer = "because no player name was given";
@@ -92,9 +96,10 @@ bool Rep2AI::findPlayer(char* searchPlayer) {
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool Rep2AI::findAttack() {
+    /**
+     * findAttack
+     */
 	int attackInsertLocation[300];
 	bool attackFound = false;
 	
@@ -125,9 +130,10 @@ bool Rep2AI::findAttack() {
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool Rep2AI::convertActionsToAI() {
+    /**
+     * convertActionsToAI
+     */
 	short BOLength = 18;
 	int spamThreshold = 10;
 
@@ -270,9 +276,10 @@ bool Rep2AI::convertActionsToAI() {
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Rep2AI::setLimits() {
+    /**
+     * setLimits
+     */
 	ai.setMax(100, scv);
 	ai.setMax(1, command_center);
 	ai.setMax(1, refinery);
@@ -330,8 +337,10 @@ void Rep2AI::setLimits() {
 	ai.setMax(1, templar_archives);	
 }
 
-////////////////////////////////////////////////////////////////////////////////
 void Rep2AI::defineBase(int x, int y) {
+    /**
+     * defineBase
+     */
 	for(int i = 0; i < baseSize; i++) {
 		for(int j = 0; j < baseSize; j++) {
 			inBase[x-(baseSize/2)+i][y-(baseSize/2)+j] = true;
@@ -339,18 +348,24 @@ void Rep2AI::defineBase(int x, int y) {
 	}
 }
 
-////////////////////////////////////////////////////////////////////////////////
 bool Rep2AI::isBase(int x, int y) {
+    /**
+     * isBase
+     */
 	return inBase[x][y];
 }
 
-////////////////////////////////////////////////////////////////////////////////
 char* Rep2AI::getBuildOrderAsText() {
+    /**
+     * getBuildOrderAsText
+     */
     return buildOrder;
 }
 
-////////////////////////////////////////////////////////////////////////////////
 bool Rep2AI::saveToAiscript(char* filename) {
+    /**
+     * saveToAiscript
+     */
     ai.saveToAiscript(filename);
     return true;
 }

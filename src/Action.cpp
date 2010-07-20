@@ -1,20 +1,23 @@
 #include "Action.h"
 
-////////////////////////////////////////////////////////////////////////////////
-
 Action::Action() {
+    /**
+     * Action
+     */
 	time = 0;
 	type = 0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Action::~Action() {
+    /**
+     * ~Action
+     */
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 int Action::set(void * address, int t) {
+    /**
+     * set
+     */
 	int chunkBytes = 2; //1 byte(player) + 1 byte(type)
 	player = *((unsigned char*)(address));
 	type = *((unsigned char*)(address)+1);

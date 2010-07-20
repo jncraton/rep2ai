@@ -96,6 +96,7 @@ void MainFrame::CreateGUIControls() {
 void MainFrame::OnClose(wxCloseEvent& event) {
     /**
     *   Event handler for the form closing event
+    *
     *   Exit the ChaosConnect Program
     */
     exit(0);

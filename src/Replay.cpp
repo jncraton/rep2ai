@@ -1,8 +1,9 @@
 #include "Replay.h"
 
-////////////////////////////////////////////////////////////////////////////////
-
 Replay::Replay(char * filename) {
+    /**
+     * Replay
+     */
  	int repID ,cmdSize = 0;
 	char * cmd;
 	FILE * replayFile;
@@ -43,7 +44,8 @@ Replay::Replay(char * filename) {
 	}
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Replay::~Replay() {
+    /**
+     * ~Replay
+     */
 }
