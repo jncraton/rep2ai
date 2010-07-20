@@ -1,5 +1,6 @@
 # 0.8.2
-- Fixed several memory leaks
+- Fixed several memory leaks 
+- Fixed a bug where a replay could only be analyzed one time
 
 # 0.8.1
 
