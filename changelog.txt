@@ -1,3 +1,6 @@
+# 0.8.2
+- Fixed several memory leaks
+
 # 0.8.1
 
 - Can now directly save to aiscript.bin

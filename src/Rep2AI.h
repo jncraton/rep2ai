@@ -10,7 +10,7 @@
 
 using namespace std;
 
-#define NAME "rep2ai 0.8.1"
+#define NAME "rep2ai 0.8.2"
 #define WEBSITE "http://joncraton.org/projects/rep2ai"
 #define AUTHOR "Jon Craton"
 
