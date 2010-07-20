@@ -134,7 +134,7 @@ void MainFrame::OpenReplay( wxCommandEvent& event ) {
 
 void MainFrame::SaveToAiscript( wxCommandEvent& event ) {
     /**
-    *   Event handler opening a replay
+    *   Event handler to save a replay to aiscript.bin
     */
     if ( replayOpen && playerSelected ) {
         wxFileDialog file_dialog(this, wxT("Select location to save to"), wxT(""), wxT("aiscript.bin"), wxT("*.bin"), wxSAVE);
@@ -155,6 +155,8 @@ void MainFrame::SelectPlayer( wxCommandEvent& event ) {
 	wxString player(playerSelection->GetString(playerSelection->GetCurrentSelection()));
     
 	if(replayFilename == "") return;
+	
+	if ( rep2ai != NULL ) free(rep2ai);
 	
     rep2ai = new Rep2AI(replay);
 	                          
