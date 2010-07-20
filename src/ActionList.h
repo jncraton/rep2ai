@@ -12,6 +12,7 @@ class ActionList
 	public:
 		ActionList();
 		~ActionList();
+		void reset();
 		void build(char * address,  int size);
 		Action next();
 		bool hasNext();

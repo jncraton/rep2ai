@@ -139,6 +139,10 @@ bool Rep2AI::convertActionsToAI() {
 	bool saidGreeting = false;
 	int thisTime, lastTime = -1000;
 
+	buildOrder[0] = 0x00;
+	
+	replay->actionList.reset();
+
 	setLimits();
 	ai.jump(0);
 	ai.multiWorkers();
@@ -245,7 +249,7 @@ bool Rep2AI::convertActionsToAI() {
 					if(BOSupply > 0) {
                         sprintf(buildOrder,"%s%d %s (%d)\n",buildOrder, BOSupply, unitToString[action.recipient].c_str(),action.recipient);
                     }
-			}
+			}                                                                              
 			if(action.type == Merge_archon) {
 					ai.safeTrainOne(archon);
 			}

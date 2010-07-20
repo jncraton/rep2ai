@@ -170,7 +170,10 @@ void MainFrame::SelectPlayer( wxCommandEvent& event ) {
 	rep2ai->findPlayer((char*)player.c_str());
 
     *text << "Writing aiscript.bin...\n";
-	rep2ai->makeAI();
+	
+    if(rep2ai->makeAI() != true) {
+        *text << "AI Generation Failed...\n";
+    }
 	
     *text << "Build Order:\n" << rep2ai->getBuildOrderAsText();
     
