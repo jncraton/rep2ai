@@ -1,6 +1,7 @@
 # 0.8.2
+- Slightly improved spam detection algorithm
 - Fixed several memory leaks 
-- Fixed a bug where a replay could only be analyzed one time
+- Fixed a bug where a replay could only be analyzed for one player
 
 # 0.8.1
 
