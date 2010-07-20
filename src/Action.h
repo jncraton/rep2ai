@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "AI.h"
+
 using namespace std;
 
 class Action
@@ -20,6 +22,8 @@ class Action
 		int recipient; //recipient of the action (unit trained, etc)
 		short int x;
 		short int y;
+		
+		char asString[256];
 		
 		Action * p_next;
 	

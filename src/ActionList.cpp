@@ -111,6 +111,27 @@ void ActionList::cleanSpam() {
     /**
      * cleanSpam
      */
+    
+    Action * old_current = p_current; 
+    
+    reset();
+    
+    FILE * debug;
+    debug = fopen("replay.txt","w");
+    
+    while(hasNext()) {
+        next();
+        
+        if(p_current->type == Build) {
+            fprintf(debug, p_current->asString);
+        }
+    }
+    
+    fprintf(debug,"test\n");
+    
+    fclose(debug);
+    
+    p_current = old_current;
      
 	return;
 }

@@ -35,6 +35,7 @@ int Action::set(void * address, int t) {
 			break;
 		case 0x0C: //Build
 			recipient = (int)*((unsigned char*)(address)+7);
+            sprintf(asString,"Player %d: Build %s\n",player, unitToString[recipient].c_str());
 			x = *((char*)address+3);
 			y = *((char*)address+5);
 			chunkBytes += 7;

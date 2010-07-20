@@ -24,6 +24,8 @@ Rep2AI::Rep2AI(Replay* replay) {
 	debugOn = false;
 	buildOrder[0] = 0x00;
 	path = "C:\\Program Files\\Starcraft\\Rep2AI\\";
+	
+	replay->actionList.cleanSpam();
 }
 
 bool Rep2AI::makeAI() {
@@ -135,15 +137,12 @@ bool Rep2AI::convertActionsToAI() {
      * convertActionsToAI
      */
 	short BOLength = 18;
-	int spamThreshold = 10;
 
 	short BOSupply = 4;
 	bool farmsDone = false;
 	bool noGasYet = true;
 	bool noComsatYet = true;
-	bool saidPlayer = false;
 	bool saidGreeting = false;
-	int thisTime, lastTime = -1000;
 
 	buildOrder[0] = 0x00;
 	
@@ -160,12 +159,6 @@ bool Rep2AI::convertActionsToAI() {
 	ai.say("I was created using jncraton's Rep2AI converter");
 	while(replay->actionList.hasNext()) {
 		Action action = replay->actionList.next();
-		thisTime = action.time;
-		if((action.player == playerID) && (thisTime >= (lastTime + spamThreshold))) {
-		lastTime = thisTime;
-		if(action.time > 500 && !saidPlayer) {
-			saidPlayer = true;
-		}	
 		if(action.time > 1000 && !saidGreeting) {
 			ai.say("GL HF"); 
 			saidGreeting = true;
@@ -266,7 +259,6 @@ bool Rep2AI::convertActionsToAI() {
 					ai.doAttack();
 					printf("First attack inserted at action %f seconds.\n",action.time/ticksPerSecond);
 			}
-	}
 	}
 	int finalLoop = ai.getCursorAddress() + 1 + 4;
 	ai.expand(99, -1);
