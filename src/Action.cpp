@@ -78,6 +78,7 @@ int Action::set(void * address, int t) {
 			break;
 		case 0x1F: //Train
 			recipient = *((unsigned char*)(address)+2);
+            sprintf(asString,"Player %d: Train %s\n",player, unitToString[recipient].c_str());
 			chunkBytes += 2;
 			break;
 		case 0x20:
@@ -91,6 +92,7 @@ int Action::set(void * address, int t) {
 			break;
 		case 0x23: //Hatch
 			recipient = *((unsigned char*)(address)+2);
+            sprintf(asString,"Player %d: Hatch %s\n",player, unitToString[recipient].c_str());
 			chunkBytes += 2;
 			break;						
 		case 0x25:
@@ -139,6 +141,7 @@ int Action::set(void * address, int t) {
 			break;			
 		case 0x35: //Morph
 			recipient = *((unsigned char*)(address)+2);
+            sprintf(asString,"Player %d: Morph %s\n",player, unitToString[recipient].c_str());
 			chunkBytes += 2;
 			break;		
 		case 0x36:
@@ -158,4 +161,15 @@ int Action::set(void * address, int t) {
 	}
 
 	return chunkBytes;
-}	
+}
+
+bool Action::isBuildOrTrain() {
+    /**
+     * isBuildOrTrain
+     */
+    return ( type == Build ||
+             type == Warp || 
+             type == Morph ||
+             type == Hatch ||
+             type == Train );
+}

@@ -15,6 +15,7 @@ class Action
 		Action();
 		~Action();
 		int set(void * address, int t);
+		bool isBuildOrTrain();
 		
 		char player; //player that executed the action
 		char type; //command opcode
