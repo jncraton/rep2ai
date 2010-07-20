@@ -262,7 +262,7 @@ bool Rep2AI::convertActionsToAI() {
 	int finalLoop = ai.getCursorAddress() + 1 + 4;
 	ai.expand(99, -1);
 	ai.doAttack();
-	ai.wait(100);
+	ai.wait(500);
 	ai.jump(finalLoop);
 	return true;
 }

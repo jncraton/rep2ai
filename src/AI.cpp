@@ -578,7 +578,7 @@ void AI::multiWorkers() {
      * multiWorkers
      */
 	multiWorkersAddress = cursor + 1 + 4;
-	for(int i = 1; i <= 25; i++) {
+	for(int i = 1; i <= 18; i++) {
 		build(i,worker,1);
 		waitBuild(i,worker);
 	}
@@ -593,6 +593,7 @@ void AI::multiExpand() {
 	add(start_town); 
 	build(1, townhall, 50);
 	waitBuild(1, townhall);
+	build(1, gas, 30);
 	for(int i = 1; i <= 15; i++) {
 		build(i,worker,1);
 		waitBuild(i,worker);
@@ -609,12 +610,21 @@ void AI::doAttack() {
 	//it then runs attack_add
 	//after all units have been trained and added, it runs attack_prepare followed by attack_do
 	add(attack_clear);
+	
 	switch(race) {
 		case 'P':
 			for(int i = 0; i <= protossTotalUnits - 1; i++) {
 				if(totalUnits[protossUnits[i]] > 0) {
 					train(totalUnits[protossUnits[i]], protossUnits[i]);
+				}						
+			}
+			for(int i = 0; i <= protossTotalUnits - 1; i++) {
+				if(totalUnits[protossUnits[i]] > 0) {
 					waitTrain(totalUnits[protossUnits[i]], protossUnits[i]);
+				}						
+			}
+			for(int i = 0; i <= protossTotalUnits - 1; i++) {
+				if(totalUnits[protossUnits[i]] > 0) {
 					attackAdd(totalUnits[protossUnits[i]], protossUnits[i]);
 				}						
 			}
@@ -623,7 +633,15 @@ void AI::doAttack() {
 			for(int i = 0; i <= terranTotalUnits - 1; i++) {
 				if(totalUnits[terranUnits[i]] > 0) {
 					train(totalUnits[terranUnits[i]], terranUnits[i]);
+				}						
+			}
+			for(int i = 0; i <= terranTotalUnits - 1; i++) {
+				if(totalUnits[terranUnits[i]] > 0) {
 					waitTrain(totalUnits[terranUnits[i]], terranUnits[i]);
+				}						
+			}
+			for(int i = 0; i <= terranTotalUnits - 1; i++) {
+				if(totalUnits[terranUnits[i]] > 0) {
 					attackAdd(totalUnits[terranUnits[i]], terranUnits[i]);
 				}						
 			}
@@ -632,11 +650,17 @@ void AI::doAttack() {
 			for(int i = 0; i <= zergTotalUnits - 1; i++) {
 				if(totalUnits[zergUnits[i]] > 0) {
 					train(totalUnits[zergUnits[i]], zergUnits[i]);
-					waitTrain(totalUnits[zergUnits[i]], zergUnits[i]);
-					attackAdd(totalUnits[zergUnits[i]], zergUnits[i]);
 				}						
 			}
-		break;
+			for(int i = 0; i <= zergTotalUnits - 1; i++) {
+				if(totalUnits[zergUnits[i]] > 0) {
+					waitTrain(totalUnits[zergUnits[i]], zergUnits[i]);
+				}						
+			}			for(int i = 0; i <= zergTotalUnits - 1; i++) {
+				if(totalUnits[zergUnits[i]] > 0) {
+					attackAdd(totalUnits[zergUnits[i]], zergUnits[i]);
+				}						
+			}		break;
 	}
 	add(attack_prepare);
 	add(attack_do);
